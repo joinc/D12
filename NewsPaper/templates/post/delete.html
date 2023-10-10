@@ -1,0 +1,33 @@
+{% extends 'default.html' %}
+{% load censor from custom_filters %}
+
+{% block title %}
+    Удаление записи
+{% endblock title %}
+
+{% block main %}
+    <nav class="my-3" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}" title="На главную">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'post_list' %}">Список записей</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'post_show' post.id %}" title="{{ post.title|censor:'*' }}">{{ post.title|truncatechars:50|censor:'*' }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Удаление записи</li>
+        </ol>
+    </nav>
+    <div class="shadow card border-dark mb-3">
+        <div class="card-header">
+            <h4>Удаление записи:</h4>
+        </div>
+        <div class="card-body">
+            <h5>Вы действительно хотите удалить запись "{{ post.title|censor:'*' }}"?</h5>
+            {{ post.text|truncatechars:300|censor:'*' }}
+        </div>
+        <div class="card-footer text-end">
+            <form method="post" class="mb-0">
+                {% csrf_token %}
+                <button class="btn btn-danger" type="submit">Удалить</button>
+                <a href="{% url 'post_show' post.id %}" class="btn btn-secondary" type="submit">Отменить</a>
+            </form>
+        </div>
+    </div>
+{% endblock main %}

@@ -1,0 +1,40 @@
+{% extends 'default.html' %}
+{% load censor from custom_filters %}
+
+{% block title %}
+    Список записей
+{% endblock title %}
+ 
+{% block main %}
+    <nav class="my-3" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Поиск записей</li>
+        </ol>
+    </nav>
+    <form method="post" action="{% url 'post_search' %}">
+        {% csrf_token %}
+        <label class="form-label mr-3">Сортировка:&nbsp;&nbsp;&nbsp;</label>
+        {% for order in form_search.ordering %}
+            <div class="form-check form-check-inline">
+                {{ order }}
+            </div>
+        {% endfor %}
+        <div class="input-group mt-3">
+            {{ form_search.search }}
+            <button class="btn btn-primary" title="Искать" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                </svg>
+                Поиск
+            </button>
+        </div>
+    </form>
+    {% include 'post/messages.html' %}
+    {% if list_post %}
+        {% include 'post/posts.html' %}
+        {% include 'post/paginator.html' %}
+    {% else %}
+        <h3>Ничего не найдено.</h3>
+    {% endif %}
+{% endblock main %}

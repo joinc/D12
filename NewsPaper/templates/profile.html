@@ -1,0 +1,17 @@
+{% extends 'default.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block main %}
+    <main class="form-signin w-50 m-auto">
+        <h3 class="my-3 fw-normal text-center">{{ title }}</h3>
+        {% if author %}
+            <h3 class="text-center">Вы являетесть автором.</h3>
+        {% else %}
+            <h3 class="text-center">Вы не автор.</h3>
+            <a class="btn btn-secondary w-100 py-2" href="{% url 'upgrade' %}">Стать автором.</a>
+        {% endif %}
+    </main>
+{% endblock main %}

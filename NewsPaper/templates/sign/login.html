@@ -1,0 +1,25 @@
+{% extends 'default.html' %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Вход в систему
+{% endblock title %}
+
+{% block main %}
+    <main class="form-signin w-50 m-auto">
+        <form method="post" action="{% url 'login' %}" class="py-3">
+            {% csrf_token %}
+            <h3 class="mb-3 fw-normal text-center">Пожалуйста войдите:</h3>
+            <div class="py-2">
+                <p class="mb-2">{{ form.username.label_tag }}</p>
+                {{ form.username|add_class:"form-control" }}
+            </div>
+            <div class="py-2">
+                <p class="mb-2">{{ form.password.label_tag }}</p>
+                {{ form.password|add_class:"form-control" }}
+            </div>
+            <button class="btn btn-primary w-100 py-2" type="submit">Войти</button>
+        </form>
+        <a class="btn btn-secondary w-100 py-2" href="{% url 'signup' %}">Регистрация</a>
+    </main>
+{% endblock main %}

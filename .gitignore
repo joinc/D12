@@ -1,0 +1,6 @@
+.idea/
+venv/
+D12/__pycache__/
+NewsPaper/__pycache__/
+NewsPaper/migrations/
+NewsPaper/templatetags/__pycache__/

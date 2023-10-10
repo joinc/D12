@@ -1,0 +1,31 @@
+{% extends 'default.html' %}
+
+{% block title %}
+    Список тематик
+{% endblock title %}
+ 
+{% block main %}
+    <nav class="my-3" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Список тематик</li>
+        </ol>
+    </nav>
+    {% include 'post/messages.html' %}
+    <ul class="list-group list-group-flush">
+        {% for category in list_category %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ category }}
+                {% if request.user.is_authenticated %}
+                    <span>
+                        {% if request.user in category.subscribers.all %}
+                            <a href="{% url 'category_unsubscribe' category.id %}" type="button" class="btn btn-sm btn-outline-danger">Отписаться</a>
+                        {% else %}
+                            <a href="{% url 'category_subscribe' category.id %}" type="button" class="btn btn-sm btn-outline-success">Подписаться</a>
+                        {% endif %}
+                    </span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock main %}

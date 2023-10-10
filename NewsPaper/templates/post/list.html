@@ -1,0 +1,21 @@
+{% extends 'default.html' %}
+{% load censor from custom_filters %}
+
+{% block title %}
+    Список записей
+{% endblock title %}
+ 
+{% block main %}
+    <nav class="my-3" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Список записей</li>
+        </ol>
+    </nav>
+    {% if list_post %}
+        {% include 'post/posts.html' %}
+        {% include 'post/paginator.html' %}
+    {% endif %}
+
+
+{% endblock main %}

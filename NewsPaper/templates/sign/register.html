@@ -1,0 +1,22 @@
+{% extends 'default.html' %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Регистрация
+{% endblock title %}
+
+{% block main %}
+    <main class="form-signin w-50 m-auto">
+        <form method="post" action="{% url 'signup' %}" class="py-3">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="py-2">
+                    <p class="mb-2">{{ field.label_tag }}</p>
+                    {{ field|add_class:"form-control" }}
+                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                </div>
+            {% endfor %}
+            <button class="btn btn-primary w-100 my-3" type="submit">Зарегистрироваться</button>
+        </form>
+    </main>
+{% endblock main %}

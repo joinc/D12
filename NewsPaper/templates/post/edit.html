@@ -1,0 +1,39 @@
+{% extends 'default.html' %}
+{% load censor from custom_filters %}
+
+{% block title %}
+    Редактирование записи
+{% endblock title %}
+
+{% block main %}
+    <nav class="my-3" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}" title="На главную">Главная</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'post_list' %}">Список записей</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'post_show' post.id %}" title="{{ post.title|censor:'*' }}">{{ post.title|truncatechars:50|censor:'*' }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Редактирование записи</li>
+        </ol>
+    </nav>
+    <div class="shadow card border-dark mb-3">
+        <div class="card-header">
+            <h4>Редактрование записи:</h4>
+        </div>
+        <form method='post' class="mb-0">
+            {% csrf_token %}
+            <div class="card-body">
+                {% for field in form %}
+                    <div class="row">
+                        <div class="col-md-12 mb-2">
+                            <h6>{{ field.label }}:</h6>
+                            {{ field }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="card-footer text-end">
+                <button class="btn btn-primary" type="submit">Сохранить</button>
+                <a href="{% url 'post_show' post.id %}" class="btn btn-secondary" type="submit">Отменить</a>
+            </div>
+        </form>
+    </div>
+{% endblock main %}

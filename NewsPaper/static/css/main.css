@@ -1,0 +1,41 @@
+header {
+    background-color: #123456 !important;
+}
+
+.offcanvas-body {
+    background-color: #123456;
+}
+.navbar-toggler-icon {
+    color: white;
+}
+.post-title {
+    font: 500 1.25rem/2rem 'ALS Hauss',Arial,sans-serif;
+    margin: 0;
+    padding: 0 0 2rem 0;
+    position: relative;
+    text-align: center;
+}
+.post-title:after {
+    font-size: 54px;
+    color: #0d6efd;
+    position: absolute;
+    height: 2px;
+    left: 20px;
+    right: 20px;
+    line-height: .5;
+    background: linear-gradient(to right, #0d6efd 45%, transparent 45%, transparent), linear-gradient(to right, transparent, transparent 55%, #0d6efd 55%);
+    font-family: serif;
+    content: "\201C";
+    top: 3rem;
+}
+.post-text {
+    margin: 0;
+    padding: 2rem;
+    position: relative;
+    text-align: left;
+}
+.post-footer {
+    position: relative;
+    padding: 0 3.5rem;
+}
+
